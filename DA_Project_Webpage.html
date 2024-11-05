@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<!--
+	Story by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+	<title>Data Analysis with Obesity Dataset</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	<style>
+        body {
+            background-color: #f0f0f0;
+        }
+	</style>
+</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+		<div id="wrapper" class="divided">
+
+			<!-- One -->
+			<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+				<div class="content">
+					<h1>Data Analysis with Obesity Dataset</h1>
+					<h2>Summary</h2>
+					<p class="major"><b>Objective</b> : Develop an advanced predictive model to accurately categorize individuals as "obese" or "non-obese" based on provided data. </p>
+					<p class="major"><b>Requirement</b> : Develop a model that accurately classifies individuals as "obese" or "non-obese" based on characteristics such as height, weight, age, gender, BMI, and physical activity level. </p>
+					<p class="major"><b>Problem Type</b> - CLASSIFICATION PROBLEM</p>
+					<p class="major">
+						<b>MODEL Tested:</b><ol style="list-style-type: decimal;">
+							<li>Logistic Regression</li>
+							<li>Linear Discriminant Analysis (LDA)</li>
+							<li>Quadratic Discriminant Analysis (QDA)</li>
+							<li>Decision Tree</li>
+							<li>Random Forest</li>
+						</ol>
+					</p>
+					<p class="major"><b>Techniques Used</b>: One-Hot Encoding, SMOTE (Synthetic Minority Oversampling Technique) , PCA (Principal Component Analysis)</p>
+					<p class="major"><b>Implication</b>: Achieving near-perfect accuracy (~100%) across models like decision trees, random forests, and logistic regression suggests potential issues, prompting a need for reverse engineering. This high accuracy may indicate data leakage (where the model relies on one or two features without learning broader patterns), overfitting (where the model memorizes instead of generalizing), or insufficient variability in the dataset.</p>
+					<p class="major"><b>Major Setback in Analysis</b>: With limited records for obese individuals, categorizing all other groups—such as underweight, normal weight, and overweight—as "non-obese" has further imbalanced the dataset, resulting in data misalignment. Additionally, applying techniques like SMOTE to balance the obese and non-obese classes exacerbates this misalignment by disproportionately increasing the count of obese records across age, gender, and physical activity levels, leading to potential biases in the model.</p>
+					<p class="major">
+						<b>Steps Followed:</b><ol style="list-style-type: decimal;">
+							<li><b>About Dataset</b> - Understanding and considering different variables and checking the number of records recorded.</li>
+							<li>
+								<b>EDA</b> - The initial analysis involves examining the characteristics of each independent variable, assessing linearity, and evaluating data distribution. This includes checking for outliers, null values, and duplicate records to ensure data quality and reliability before model development.
+								<b>Result</b> : <i>No significant differences or anomalies were identified.</i>
+							</li>
+							<li>
+								<b>DATA PRE-PROCESSING</b> - One-hot encoding is employed to transform categorical variables, such as gender and obesity category, into numerical columns, facilitating their use as inputs for model building.
+								<i>
+									<b>NOTE</b>: Since the requirement is more focused towards obese people, so OBESTIY_CATEGORY is divided into two categories only - Obese and Non-Obese.
+									This created a huge imbalance in the dataset - (191 - Obese ; 809 - Non-Obese).
+								</i>
+							</li>
+							<li>
+								<b>MODEL BUILDING</b> - Verifying the assumptions of the selected classification models and conducting an initial round of testing.
+								<i>Result: One major outcome is to remove the BMI column because 1) Since BMI is highly correlated with other variables (Weight, Height, Obesity_Category) 2) Data in BMI is not normally distributed 3) High Variance Inflation Factor (VIF) in BMI</i>
+							</li>
+							<li><b>PRE-PROCESSING</b> - An additional dataset was created excluding the BMI variable to assess the impact of its absence on the results.</li>
+							<li>
+								<b>Model Building</b> - Again tested both balanced and non-balanced dataset on dataset without BMI variable.
+								<i>Results: The model results revealed a decrease in accuracy and F1 score for logistic regression, decision tree, and random forest models upon excluding the BMI variable, highlighting its significance in the analysis. This is consistent with expectations, as BMI is derived from weight and height.</i>
+							</li>
+							<li><b>EDA</b> - Upon closer examination of both the balanced and imbalanced datasets, it was observed that SMOTE disproportionately increased the number of obese records relative to non-obese records, further skewing the dataset. For instance, the number of obese records surged beyond those of non-obese individuals in age categories such as 18-27, 28-37, and 68-77, where non-obese records were previously more prevalent. A similar trend was noted with gender, as the count of female records (581) rose significantly compared to the non-obese category (424). </li>
+						</ol>
+					</p>
+					<p class="major">
+						<b>Next Steps</b>: <ol style="list-style-type: circle;">
+							<li>Applying clustering techniques for groups like normal weight, underweight, overweight, and obese may yield better results, as the original dataset is proportionately distributed across these categories. This approach reduces the risk of misalignment since balancing the dataset would no longer be necessary.</li>
+							<li>Since logistic regression assumes a sufficiently large dataset, collecting more data could enhance analysis accuracy and improve results.</li>
+							<li>Hyperparameter tuning, such as using lbfgs as a solver for logistic regression instead of newton-cg, has shown to improve model performance. Further tuning could optimize results.</li>
+							<li>Addressing assumptions for other models, such as applying dimensionality reduction to mitigate covariance, could improve compatibility with models like LDA, which assumes no multicollinearity.</li>
+							<li>Including additional variables, such as sleep cycle, could enhance predictability in classifying obesity categories.</li>
+						</ol>
+					</p>
+					<ul class="actions stacked">
+						<li><a href="https://github.com/ShivamDhawan330/Data_Analysis_with_Obesity_Dataset" target="_blank" class="button big wide smooth-scroll-middle">GitHub Code</a></li>
+					</ul>
+					<style>
+						.image-container {
+							width: 1341px;
+							height: 511px;
+							overflow: hidden;
+						}
+
+							.image-container img {
+								width: 100%;
+								height: auto;
+								object-fit: cover;
+							}
+					</style>
+				</div>
+			</section>
+		</div>
+		<div class="image-container">
+			<img src="images/Results.jpeg" alt="Evaluation Results" />
+		</div>
+
+		<!-- Footer -->
+		<footer class="wrapper style1 align-center">
+			<div class="inner">
+				<ul class="icons">
+					<li><a href="https://www.youtube.com/channel/UCeNV_T7ckOQ8aTmfrSmOfpw" target="_blank" class="icon brands fa-youtube"><span class="label">youtube</span></a></li>
+					<li><a href="https://github.com/ShivamDhawan330" target="_blank" class="icon brands fa-github"><span class="label">Github</span></a></li>
+					<li><a href="https://www.linkedin.com/in/shivam-dhawan-b1b83b178/" target="_blank" class="icon brands fa-linkedin"><span class="label">linkedin</span></a></li>
+					<li><a href="mailto:shivam.dhawan330@gmail.com" target="_blank" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+				</ul>
+			</div>
+		</footer>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
